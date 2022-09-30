@@ -13,12 +13,10 @@ function array_sort_int (arr: hexArray_Integer; type_sort: SORT_TYPE): hexArray_
 function array_remove_int (arr: hexArray_Integer; number: integer): hexArray_Integer;
 function array_push_int (arr: hexArray_Integer; number: integer): hexArray_Integer;
 function getLength_Array (arr: hexArray_Integer): integer;
-
+function range_array_integer (Min: integer;Max:integer; byFar:integer): hexArray_Integer;
+function replace_element_array_integer (arr: hexArray_Integer; ors: integer; repl: integer): hexArray_Integer;
 implementation
 
-    {
-        Find the smallest number in an array
-    }
     function array_min_int (arr: hexArray_Integer): integer;
     var
         i: integer;
@@ -41,9 +39,6 @@ implementation
         end;
     end;
 
-    {
-        Find the largest number in an array
-    }
     function array_max_int (arr: hexArray_Integer): integer;
     var
         i, getLength, max: integer;
@@ -63,9 +58,6 @@ implementation
         end;
     end;
 
-    {
-        Sum of elements in array
-    }
     function array_sum_int (arr: hexArray_Integer): integer;
     var
         i, result, getLength: integer;
@@ -83,9 +75,6 @@ implementation
         end;
     end;
 
-    {
-        Rearrange arrays
-    }
     function array_sort_int (arr: hexArray_Integer; type_sort: SORT_TYPE): hexArray_Integer;
     var
         i, realstt, trush: integer;
@@ -131,13 +120,7 @@ implementation
         end;
         array_push_int := arr;
     end;
-    {
-        merge two arrays
-    }
-    
-    {
-        delete an element in an array
-    }
+
     function array_remove_int (arr: hexArray_Integer; number: integer): hexArray_Integer;
     var
         newArr: hexArray_Integer;
@@ -152,10 +135,6 @@ implementation
         array_remove_int := newArr;
     end;
 
-    
-    {
-        length
-    }
     function getLength_Array (arr: hexArray_Integer): integer;
     var
         result: integer;
@@ -171,5 +150,36 @@ implementation
             end;
         end;
         getLength_Array := result;
+    end;
+
+    function range_array_integer (Min: integer;Max:integer; byFar:integer): hexArray_Integer;
+    var
+        rangeArr: hexArray_Integer;
+        i, current:integer;
+    begin
+        current := -1;
+        rangeArr := array_push_int(rangeArr, Min);
+        for i:=Min to Max do begin
+            current := current + 1;
+            if (current = byFar) then begin
+                rangeArr := array_push_int(rangeArr, i);
+                current := 0;
+            end;
+        end;
+        Range_Array_Integer := rangeArr;
+    end;
+
+
+    function replace_element_array_integer (arr: hexArray_Integer; ors: integer; repl: integer): hexArray_Integer;
+    var
+        returnArr: hexArray_Integer;
+        i: integer;
+    begin
+        for i:=0 to getLength_Array(arr)-1 do begin
+            if arr[i] = ors then begin
+                arr[i] := repl;
+            end;
+        end;
+        replace_element_array_integer := arr;
     end;
 end.
